@@ -2,29 +2,19 @@ package com.example.itemsearch.model
 
 data class Result(
     val accepts_mercadopago: Boolean,
-    val attributes: List<Any>,
+    val address: Address,
+    val attributes: List<Attribute>,
     val available_quantity: Int,
-    val buying_mode: String,
-    val catalog_listing: Boolean,
     val catalog_product_id: String,
     val category_id: String,
     val condition: String,
     val currency_id: String,
-    val domain_id: String,
     val id: String,
-    val listing_type_id: String,
-    val official_store_id: Int,
-    val order_backend: Int,
-    val original_price: Int,
     val permalink: String,
     val price: Int,
-    val sale_price: Any,
     val site_id: String,
     val sold_quantity: Int,
-    val stop_time: String,
-    val tags: List<Any>,
     val thumbnail: String,
     val thumbnail_id: String,
-    val title: String,
-    val use_thumbnail_id: Boolean
+    val title: String
 )
