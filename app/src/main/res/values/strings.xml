@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Item Search</string>
+    <string name="titulo">TITULO</string>
+    <string name="item_image">Item Image</string>
 </resources>
