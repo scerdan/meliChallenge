@@ -1,7 +1,8 @@
 package com.example.itemsearch.model
 
-data class Value(
+data class Filter(
     val id: String,
     val name: String,
-    val results: Int
+    val type: String,
+    val values: List<ValueX>
 )

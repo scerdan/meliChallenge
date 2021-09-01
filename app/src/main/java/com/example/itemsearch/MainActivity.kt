@@ -6,14 +6,11 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.itemsearch.data.APIservice
 import com.example.itemsearch.databinding.ActivityMainBinding
-import com.example.itemsearch.model.Item
 import com.example.itemsearch.ui.ItemAdapter
 import com.google.gson.Gson
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -52,15 +49,13 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.IO) {
             val response = api.getSearchItem(url)
-            var rta = response.body()?.results
-            var gson = Gson()
-            val dto = gson.toJson(rta)
-            val gg = dto[0]
+            val rta = response
 
+            val gson = Gson()
+            val dto = gson.toJson(rta)
 
             runOnUiThread {
-                print(gg.toString())
-                Log.e("VER", gg.toString())
+                Log.e("VER", rta.country_default_time_zone)
 
 //                Log.e("200", dto.length.toString())
 

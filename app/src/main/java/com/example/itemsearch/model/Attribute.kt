@@ -9,5 +9,5 @@ data class Attribute(
     val value_id: String,
     val value_name: String,
     val value_struct: Any,
-    val values: List<Value>
+    val values: List<ValueXX>
 )

@@ -1,7 +1,7 @@
 package com.example.itemsearch.model
 
-data class Value(
+data class ValueX(
     val id: String,
     val name: String,
-    val results: Int
+    val path_from_root: List<PathFromRoot>
 )
