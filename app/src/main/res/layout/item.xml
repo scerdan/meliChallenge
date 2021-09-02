@@ -2,13 +2,13 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv_itemCard"
-    android:layout_width="300dp"
+    android:layout_width="330dp"
     android:layout_height="150dp"
     android:layout_gravity="center_horizontal"
-    android:layout_marginTop="15dp"
+    android:layout_marginTop="25dp"
     android:elevation="15dp"
     android:orientation="horizontal"
-    app:cardBackgroundColor="@color/amarilloMeli"
+    app:cardBackgroundColor="@color/yellowMeli"
     app:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/iv_items"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
             android:layout_marginStart="16dp"
             android:contentDescription="@string/item_image"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -30,9 +30,9 @@
             android:id="@+id/tv_title"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:gravity="center"
-            android:textColor="@color/black"
+            android:textColor="@color/blueMeli"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_items"
             app:layout_constraintTop_toTopOf="@+id/iv_items" />

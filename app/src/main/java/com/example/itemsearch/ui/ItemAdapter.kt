@@ -26,11 +26,12 @@ class ItemAdapter(private val elementSearch: MutableList<ArrayList<String>>) :
         var title: TextView = binding.tvTitle
         var img: ImageView = binding.ivItems
 
-    }
+        }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = elementSearch[position]
         holder.title.text = item[0]
         Picasso.get().load(item[1]).into(holder.img)
+
     }
 }
