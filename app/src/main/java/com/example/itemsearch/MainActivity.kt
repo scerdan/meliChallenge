@@ -3,6 +3,7 @@ package com.example.itemsearch
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
@@ -14,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     //https://api.mercadolibre.com/sites/MLA/search?q=[...]
     private lateinit var binding: ActivityMainBinding
@@ -31,7 +32,8 @@ class MainActivity : AppCompatActivity() {
 
 //        initRecyclerView()
 
-        searchItem("moto")
+
+        binding.svSearchItems.setOnQueryTextListener(this)
     }
 
     private fun initRecyclerView() {
@@ -63,6 +65,17 @@ class MainActivity : AppCompatActivity() {
                 Log.e("ERROR", error.toString())
             })
         queue.add(jsonObjectRequest)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (!query.isNullOrEmpty()) {
+            searchItem(query.lowercase())
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        return true
     }
 }
 
