@@ -29,14 +29,14 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-                setContentView(binding.root)
+        setContentView(binding.root)
 
 //
 
-        val recyclerV = binding.rvContainerItems
-        recyclerV.layoutManager = LinearLayoutManager(this)
-        mAdapter = ItemAdapter(itemsAdd)
-        recyclerV.adapter = mAdapter
+//        val recyclerV = binding.rvContainerItems
+//        recyclerV.layoutManager = LinearLayoutManager(this)
+//        mAdapter = ItemAdapter(itemsAdd)
+//        recyclerV.adapter = mAdapter
 
         binding.svSearchItems.setOnQueryTextListener(this)
 
@@ -45,12 +45,9 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private fun initRecyclerView() {
         val recyclerV = binding.rvContainerItems
         recyclerV.layoutManager = LinearLayoutManager(this)
-        val mAdapter = ItemAdapter(itemsAdd)
+        mAdapter = ItemAdapter(itemsAdd)
         recyclerV.adapter = mAdapter
-
-//        mAdapter = ItemAdapter(itemsAdd)
-//        binding.rvContainerItems.layoutManager = LinearLayoutManager(this)
-//        binding.rvContainerItems.adapter = mAdapter
+        mAdapter.notifyDataSetChanged()
     }
 
     private fun searchItem(items: String) {
@@ -67,18 +64,22 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                         for (i in 0 until rta.length()) {
                             val jsonObject = rta.getJSONObject(i)
 
-                            val box = ArrayList<String>(1)
+                            val box = ArrayList<String>(4)
                             val title = jsonObject.get("title")
                             val thumbnail = jsonObject.get("thumbnail")
+                            val price = jsonObject.get("price")
+                            val url = jsonObject.get("permalink")
 
                             box.add(0, title.toString())
                             box.add(1, thumbnail.toString())
+                            box.add(2, price.toString())
+                            box.add(3, url.toString())
 
                             itemsAdd.add(i, box)
-                            mAdapter.notifyDataSetChanged()
+//                            mAdapter.notifyDataSetChanged()
                             Log.e("ver", itemsAdd.toString())
 
-                            //initRecyclerView()
+                            initRecyclerView()
                         }
                     }
                 }

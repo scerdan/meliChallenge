@@ -23,14 +23,16 @@ class ItemAdapter(private val elementSearch: MutableList<ArrayList<String>>) :
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemBinding.bind(view)
-        var title: TextView = binding.tvTitle
-        var img: ImageView = binding.ivItems
+        val title: TextView = binding.tvTitle
+        val img: ImageView = binding.ivItems
+        val subTitle = binding.tvSubTitle
 
         }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = elementSearch[position]
         holder.title.text = item[0]
+        holder.subTitle.text = item[3]
         Picasso.get().load(item[1]).into(holder.img)
 
     }
