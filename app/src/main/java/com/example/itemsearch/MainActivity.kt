@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     //https://api.mercadolibre.com/sites/MLA/search?q=[...]
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: ItemAdapter
-    private val itemImgs = mutableListOf<String>()
+    private val itemsAdd = mutableListOf<ArrayList<String>>()
 
     val URL: String = "https://api.mercadolibre.com/sites/MLA/search?q="
 
@@ -55,9 +55,16 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     runOnUiThread {
                         for (i in 0 until rta.length()) {
                             val jsonObject = rta.getJSONObject(i)
-                            val titulo = jsonObject.get("title")
+
+                            val box = ArrayList<String>(2)
+                            val title = jsonObject.get("title")
                             val thumbnail = jsonObject.get("thumbnail")
-                            Log.e(titulo.toString(), thumbnail.toString())
+
+                            box.add(0, title.toString())
+                            box.add(1, thumbnail.toString())
+
+                            itemsAdd.add(i, box)
+                            Log.e("ver", itemsAdd.toString())
                         }
                     }
                 }
