@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mAdapter: ItemAdapter
     private val itemsAdd = mutableListOf<ArrayList<String>>()
-
     val URL: String = "https://api.mercadolibre.com/sites/MLA/search?q="
 
 
@@ -31,15 +30,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//
-
-//        val recyclerV = binding.rvContainerItems
-//        recyclerV.layoutManager = LinearLayoutManager(this)
-//        mAdapter = ItemAdapter(itemsAdd)
-//        recyclerV.adapter = mAdapter
-
         binding.svSearchItems.setOnQueryTextListener(this)
-
     }
 
     private fun initRecyclerView() {

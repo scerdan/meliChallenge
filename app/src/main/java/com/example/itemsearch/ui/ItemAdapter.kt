@@ -1,5 +1,7 @@
 package com.example.itemsearch.ui
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,14 +28,21 @@ class ItemAdapter(private val elementSearch: MutableList<ArrayList<String>>) :
         val title: TextView = binding.tvTitle
         val img: ImageView = binding.ivItems
         val subTitle = binding.tvSubTitle
+        private val cardViewItem = binding.cvItemCard
+        private val context: Context = view.context
 
+        init {
+            cardViewItem.setOnClickListener { v ->
+                val int = Intent(v.context, DetailActivity::class.java)
+                context.startActivity(int)
+            }
         }
+    }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = elementSearch[position]
         holder.title.text = item[0]
         holder.subTitle.text = item[3]
         Picasso.get().load(item[1]).into(holder.img)
-
     }
 }
