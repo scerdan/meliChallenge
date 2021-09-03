@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cv_itemCard"
-    android:layout_width="330dp"
-    android:layout_height="150dp"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
     android:layout_gravity="center_horizontal"
+    android:layout_marginStart="20dp"
     android:layout_marginTop="25dp"
+    android:layout_marginEnd="20dp"
     android:elevation="15dp"
     android:orientation="horizontal"
-    app:cardBackgroundColor="@color/yellowMeli"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="20dp"
+    app:cardElevation="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,9 +20,9 @@
 
         <ImageView
             android:id="@+id/iv_items"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="140dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="20dp"
             android:contentDescription="@string/item_image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,24 +32,27 @@
             android:id="@+id/tv_title"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:gravity="center_horizontal"
             android:maxLines="2"
             android:textColor="@color/blueMeli"
             android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_items"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_items"
             app:layout_constraintTop_toTopOf="@+id/iv_items" />
 
-        <TextView
-            android:id="@+id/tv_subTitle"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
-
-            android:maxLines="3"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_items"
-            app:layout_constraintEnd_toEndOf="@+id/tv_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"
-            app:layout_constraintVertical_bias="0.87" />
+        <com.google.android.material.checkbox.MaterialCheckBox
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="5dp"
+            android:id="@+id/cb_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/cb_favorite"
+            android:buttonTint="#FF0000"
+            android:checked="false"
+            tools:layout_editor_absoluteX="322dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
