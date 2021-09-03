@@ -2,4 +2,6 @@
     <string name="app_name">Item Search</string>
     <string name="titulo">TITULO</string>
     <string name="item_image">Item Image</string>
+    <string name="background">Background</string>
+    <string name="card_image_item">Card Image Item</string>
 </resources>
