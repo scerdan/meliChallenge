@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private fun initRecyclerView() {
         val recyclerV = binding.rvContainerItems
         recyclerV.layoutManager = LinearLayoutManager(this)
-        mAdapter = ItemAdapter(itemsAdd)
+        mAdapter = ItemAdapter(this, itemsAdd)
         recyclerV.adapter = mAdapter
     }
 
@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     runOnUiThread {
                         for (i in 0 until rta.length()) {
                             val jsonObject = rta.getJSONObject(i)
-
                             val box = ArrayList<String>(4)
                             val title = jsonObject.get("title")
                             val thumbnail = jsonObject.get("thumbnail")
@@ -74,6 +73,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                             pb_indicator.hide()
                             initRecyclerView()
                         }
+                        //Log.e("RTA", rta.toString())
                     }
                 }
             },
