@@ -19,15 +19,24 @@ class DetailActivity : AppCompatActivity() {
         val imgDetail = binding.imgItem
         val titleDetail = binding.tvItem
         val tvLink = binding.tvLink
+        val tvPrice = binding.tvPrice
 
-        paintView(imgDetail, titleDetail, tvLink)
+        paintView(imgDetail, titleDetail, tvLink, tvPrice)
     }
 
-    private fun paintView(img: ImageView, titleDetail: TextView, tvLink: TextView) {
+    private fun paintView(
+        img: ImageView,
+        titleDetail: TextView,
+        tvLink: TextView,
+        tvPrice: TextView
+    ) {
         if (intent.extras != null) {
+            val priceInt = intent.getStringExtra("price")
+            val priceVal = "$$priceInt"
             Picasso.get().load(intent.getStringExtra("img")).into(img)
             titleDetail.text = intent.getStringExtra("title")
             tvLink.text = intent.getStringExtra("url")
+            tvPrice.text = priceVal
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.itemsearch
+package com.example.itemsearch.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,9 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.itemsearch.ItemAdapter
 import com.example.itemsearch.databinding.ActivityMainBinding
-import com.example.itemsearch.ui.DetailActivity
-import com.example.itemsearch.ui.ItemAdapter
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -98,11 +97,12 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener, OnItem
         imm.hideSoftInputFromWindow(binding.viewRoot.windowToken, 0)
     }
 
-    override fun onItemClick(title: String, img: String, url: String) {
+    override fun onItemClick(title: String, img: String, url: String, price: String) {
         val int = Intent(this, DetailActivity::class.java)
         int.putExtra("title", title)
         int.putExtra("img", img)
         int.putExtra("url", url)
+        int.putExtra("price", price)
         startActivity(int)
     }
 }
