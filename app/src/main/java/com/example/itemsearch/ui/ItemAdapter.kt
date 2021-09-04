@@ -14,9 +14,9 @@ import com.example.itemsearch.databinding.ItemBinding
 import com.squareup.picasso.Picasso
 
 class ItemAdapter(
-    val context: Context,
-    val elementSearch: MutableList<ArrayList<String>>,
-//    val itemClickListener: OnItemSearchClick
+    private val context: Context,
+    private val elementSearch: MutableList<ArrayList<String>>,
+    val itemClickListener: OnItemSearchClick
 ) :
     RecyclerView.Adapter<BaseViewHolder<*>>() {
 
@@ -44,6 +44,10 @@ class ItemAdapter(
 
             title.text = item[0]
             Picasso.get().load(item[1]).into(img)
+
+            itemView.setOnClickListener {
+                itemClickListener.onItemClick(item[0], item[1], item[3])
+            }
         }
     }
 }

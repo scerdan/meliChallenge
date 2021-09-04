@@ -1,46 +1,43 @@
 package com.example.itemsearch
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import android.widget.ProgressBar
 import androidx.appcompat.widget.SearchView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.itemsearch.databinding.ActivityMainBinding
+import com.example.itemsearch.ui.DetailActivity
 import com.example.itemsearch.ui.ItemAdapter
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
+class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener, OnItemSearchClick {
 
     //https://api.mercadolibre.com/sites/MLA/search?q=[...]
     private lateinit var binding: ActivityMainBinding
     private lateinit var mAdapter: ItemAdapter
     private val itemsAdd = mutableListOf<ArrayList<String>>()
-    private lateinit var pb_indicator: CircularProgressIndicator
-
-    val URL: String = "https://api.mercadolibre.com/sites/MLA/search?q="
-
+    private lateinit var pbIndicator: CircularProgressIndicator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        pb_indicator = binding.piLoad
+        pbIndicator = binding.piLoad
         binding.svSearchItems.setOnQueryTextListener(this)
     }
 
     private fun initRecyclerView() {
         val recyclerV = binding.rvContainerItems
         recyclerV.layoutManager = LinearLayoutManager(this)
-        mAdapter = ItemAdapter(this, itemsAdd)
+        mAdapter = ItemAdapter(this, itemsAdd, this)
         recyclerV.adapter = mAdapter
     }
 
@@ -70,7 +67,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
                             itemsAdd.add(i, box)
                             Log.e("ver", itemsAdd.toString())
-                            pb_indicator.hide()
+                            pbIndicator.hide()
                             initRecyclerView()
                         }
                         //Log.e("RTA", rta.toString())
@@ -85,7 +82,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (!query.isNullOrEmpty()) {
-            pb_indicator.show()
+            pbIndicator.show()
             searchItem(query.lowercase())
             hideKeyboard()
         }
@@ -99,6 +96,14 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private fun hideKeyboard() {
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(binding.viewRoot.windowToken, 0)
+    }
+
+    override fun onItemClick(title: String, img: String, url: String) {
+        val int = Intent(this, DetailActivity::class.java)
+        int.putExtra("title", title)
+        int.putExtra("img", img)
+        int.putExtra("url", url)
+        startActivity(int)
     }
 }
 
