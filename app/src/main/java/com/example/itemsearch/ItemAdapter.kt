@@ -42,7 +42,7 @@ class ItemAdapter(
 
 
             title.text = item[0]
-            Picasso.get().load(item[1]).into(img)
+            Picasso.get().load(item[1]).resize(150, 150).centerCrop().into(img)
 
             itemView.setOnClickListener {
                 itemClickListener.onItemClick(item[0], item[1], item[3], item[2])

@@ -33,7 +33,7 @@ class DetailActivity : AppCompatActivity() {
         if (intent.extras != null) {
             val priceInt = intent.getStringExtra("price")
             val priceVal = "$$priceInt"
-            Picasso.get().load(intent.getStringExtra("img")).into(img)
+            Picasso.get().load(intent.getStringExtra("img")).resize(150, 150).centerCrop().into(img)
             titleDetail.text = intent.getStringExtra("title")
             tvLink.text = intent.getStringExtra("url")
             tvPrice.text = priceVal

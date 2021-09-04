@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
     tools:context=".ui.DetailActivity">
 
     <FrameLayout
@@ -78,14 +79,14 @@
         app:layout_constraintStart_toEndOf="@+id/cardView" />
 
     <TextView
-        android:autoLink="web"
-        android:textColorLink="@color/blueMeli"
         android:id="@+id/tv_link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autoLink="web"
         android:gravity="center"
         android:padding="16dp"
         android:text="Overview"
+        android:textColorLink="@color/blueMeli"
         android:textSize="20sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
