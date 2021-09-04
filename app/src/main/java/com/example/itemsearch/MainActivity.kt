@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
+import android.widget.ProgressBar
 import androidx.appcompat.widget.SearchView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.itemsearch.databinding.ActivityMainBinding
 import com.example.itemsearch.ui.ItemAdapter
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -22,6 +24,8 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mAdapter: ItemAdapter
     private val itemsAdd = mutableListOf<ArrayList<String>>()
+    private lateinit var pb_indicator: CircularProgressIndicator
+
     val URL: String = "https://api.mercadolibre.com/sites/MLA/search?q="
 
 
@@ -29,7 +33,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        pb_indicator = binding.piLoad
         binding.svSearchItems.setOnQueryTextListener(this)
     }
 
@@ -38,7 +42,6 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         recyclerV.layoutManager = LinearLayoutManager(this)
         mAdapter = ItemAdapter(itemsAdd)
         recyclerV.adapter = mAdapter
-        mAdapter.notifyDataSetChanged()
     }
 
     private fun searchItem(items: String) {
@@ -67,9 +70,8 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                             box.add(3, url.toString())
 
                             itemsAdd.add(i, box)
-//                            mAdapter.notifyDataSetChanged()
                             Log.e("ver", itemsAdd.toString())
-
+                            pb_indicator.hide()
                             initRecyclerView()
                         }
                     }
@@ -83,6 +85,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (!query.isNullOrEmpty()) {
+            pb_indicator.show()
             searchItem(query.lowercase())
             hideKeyboard()
         }
