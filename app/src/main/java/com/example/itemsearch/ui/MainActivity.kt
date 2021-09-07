@@ -11,8 +11,10 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.itemsearch.ItemAdapter
+import com.example.itemsearch.data.remote.MySingletonVolley
 import com.example.itemsearch.databinding.ActivityMainBinding
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -40,13 +42,12 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener, OnItem
         recyclerV.adapter = mAdapter
     }
 
+    @DelicateCoroutinesApi
     private fun searchItem(items: String) {
-        val queue = Volley.newRequestQueue(this)
         val URL = "https://api.mercadolibre.com/sites/MLA/search?q=${items}"
 
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, URL, null,
             { response ->
-
                 GlobalScope.launch(Dispatchers.IO) {
                     val rta = response.getJSONArray("results")
 
@@ -65,18 +66,16 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener, OnItem
                             box.add(3, url.toString())
 
                             itemsAdd.add(i, box)
-                            Log.e("ver", itemsAdd.toString())
                             pbIndicator.hide()
                             initRecyclerView()
                         }
-                        //Log.e("RTA", rta.toString())
                     }
                 }
             },
             { error ->
                 Log.e("ERROR", error.toString())
             })
-        queue.add(jsonObjectRequest)
+        MySingletonVolley.getInstance(this).addToRequestQueue(jsonObjectRequest)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
